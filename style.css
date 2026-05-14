@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Tailwind v4 CSS is not yet fully supported via simple CDN in the same way as v3, 
+   so I'll use standard CSS for the custom theme variables and classes 
+   while relying on the Tailwind v3 Play CDN for utilities. */
+
+:root {
+  --agri-green-50: #f4faf2;
+  --agri-green-100: #e5f5df;
+  --agri-green-500: #56af43; /* Brand Primary Green */
+  --agri-green-600: #489338;
+  --agri-green-700: #3a762d;
+  --agri-green-800: #2c5922;
+  --agri-green-900: #1e3d17;
+  --agri-dark: #121812; /* Deep Forest Black-Green */
+  --agri-navy-light: #2d3b2d; /* Forest Slate */
+  --agri-earth: #78350f;
+  --agri-gold: #f59e0b;
+  --agri-bronze: #92400e;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #1e293b; /* slate-800 */
+  background-color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.025em; /* tracking-tight */
+  color: var(--agri-dark);
+}
+
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--agri-green-500), var(--agri-green-800));
+}
+
+.agri-pattern {
+  background-image: radial-gradient(var(--agri-dark) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+  opacity: 0.05;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9; /* slate-100 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--agri-green-600);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--agri-green-700);
+}
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Modal styles */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(18, 24, 18, 0.8);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 42rem; /* 2xl */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Navigation scroll styles */
+.nav-scrolled {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  border-radius: 1.5rem;
+  padding: 0.75rem 1.5rem !important;
+}
+
+.nav-scrolled .nav-text {
+  color: #475569; /* slate-600 */
+}
+
+.nav-scrolled .logo-text {
+  color: var(--agri-dark);
+}
+
+/* Mobile menu */
+#mobile-menu {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.3s ease;
+}
+
+#mobile-menu.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Chatbot Styles */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#chatbot-container.active {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Message animations */
+@keyframes message-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-message {
+  animation: message-slide-up 0.3s ease forwards;
+}
+
+/* Typing indicator */
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #94a3b8; /* slate-400 */
+  border-radius: 50%;
+  display: inline-block;
+  animation: typing 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
